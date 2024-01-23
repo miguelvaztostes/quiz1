@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+
+    #quiz-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .question {
+      display: none;
+      margin-bottom: 20px;
+    }
+
+    .options button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .options button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="quiz-container">
+  <h2>Quiz</h2>
+
+  <!-- Pergunta 1 -->
+  <div class="question" id="question1">
+    <p>Qual é a sua idade?</p>
+    <div class="options" id="options1">
+      <button onclick="checkAnswer(1, 'menos18')">Menos de 18</button>
+      <button onclick="checkAnswer(1, '18-30')">18-30</button>
+      <button onclick="checkAnswer(1, '31-50')">31-50</button>
+      <button onclick="checkAnswer(1, 'mais50')">Mais de 50</button>
+    </div>
+  </div>
+
+  <!-- Pergunta 2 -->
+  <div class="question" id="question2">
+    <p>Qual é a sua profissão?</p>
+    <div class="options" id="options2">
+      <button onclick="checkAnswer(2, 'estudante')">Estudante</button>
+      <button onclick="checkAnswer(2, 'profissional')">Profissional</button>
+      <button onclick="checkAnswer(2, 'empresario')">Empresário</button>
+      <button onclick="checkAnswer(2, 'outro')">Outro</button>
+    </div>
+  </div>
+
+  <!-- Pergunta 3 -->
+  <div class="question" id="question3">
+    <p>Qual é o seu estado?</p>
+    <div class="options" id="options3">
+      <button onclick="checkAnswer(3, 'AC')">Acre</button>
+      <button onclick="checkAnswer(3, 'AL')">Alagoas</button>
+      <button onclick="checkAnswer(3, 'AP')">Amapá</button>
+      <button onclick="checkAnswer(3, 'AM')">Amazonas</button>
+    </div>
+  </div>
+
+  <!-- Pergunta 4 -->
+  <div class="question" id="question4">
+    <p>Você mora com seus pais?</p>
+    <div class="options" id="options4">
+      <button onclick="checkAnswer(4, 'sim')">Sim</button>
+      <button onclick="checkAnswer(4, 'nao')">Não</button>
+    </div>
+  </div>
+
+  <!-- Pergunta 5 -->
+  <div class="question" id="question5">
+    <p>Você está atualmente empregado?</p>
+    <div class="options" id="options5">
+      <button onclick="checkAnswer(5, 'sim')">Sim</button>
+      <button onclick="checkAnswer(5, 'nao')">Não</button>
+    </div>
+  </div>
+
+  <!-- Pergunta 6 -->
+  <div class="question" id="question6">
+    <p>Qual é a sua escolaridade?</p>
+    <div class="options" id="options6">
+      <button onclick="checkAnswer(6, 'fundamental')">Ensino Fundamental</button>
+      <button onclick="checkAnswer(6, 'medio')">Ensino Médio</button>
+      <button onclick="checkAnswer(6, 'superior')">Ensino Superior</button>
+      <button onclick="checkAnswer(6, 'pos')">Pós-graduação</button>
+    </div>
+  </div>
+
+  <div id="result">
+    <p>Obrigado por responder ao quiz!</p>
+    <p id="result-text"></p>
+  </div>
+</div>
+
+<script>
+  let currentQuestion = 1;
+  let answers = {};
+
+  function showQuestion(questionNumber) {
+    document.getElementById(`question${questionNumber}`).style.display = 'block';
+  }
+
+  function hideQuestion(questionNumber) {
+    document.getElementById(`question${questionNumber}`).style.display = 'none';
+  }
+
+  function checkAnswer(questionNumber, answer) {
+    answers[`question${questionNumber}`] = answer;
+    hideQuestion(questionNumber);
+
+    if (questionNumber === 6) {
+      showResult();
+    } else {
+      currentQuestion++;
+      showQuestion(currentQuestion);
+    }
+  }
+
+  function showResult() {
+    let resultText = `Idade: ${answers.question1}, Profissão: ${answers.question2}, Estado: ${answers.question3}, Mora com os pais: ${answers.question4}, Empregado: ${answers.question5}, Escolaridade: ${answers.question6}`;
+    document.getElementById('result-text').innerText = resultText;
+    document.getElementById('result').style.display = 'block';
+  }
+
+  // Iniciar o quiz mostrando a primeira pergunta
+  showQuestion(currentQuestion);
+</script>
+
+</body>
+</html>
